@@ -1,0 +1,29 @@
+{
+  "name": "short-url",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
+    "clipboard": "^2.0.11",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.1",
+    "memorystore": "^1.6.7",
+    "mongoose": "^6.11.2",
+    "nanoid": "^4.0.0",
+    "nodemon": "^2.0.20",
+    "request-ip": "^3.3.0",
+    "shortid": "^2.2.16",
+    "uuid": "^9.0.0",
+    "validator": "^13.9.0"
+  }
+}

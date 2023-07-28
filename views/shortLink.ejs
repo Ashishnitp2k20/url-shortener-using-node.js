@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Short Link</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            height: 100vh;
+            background: linear-gradient(180deg, #1B6B93, #9BDEAC) no-repeat scroll;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        p{
+            background: linear-gradient(135deg, #1B6B93, #164B60) no-repeat scroll;
+            padding: 20px 10px;
+            border-radius: 20px 20px 20px 20px;
+        }
+        #shortURL {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .button {
+  position: relative;
+  overflow: hidden;
+  height: 3rem;
+  padding: 0 2rem;
+  margin-top: 2rem;
+  border-radius: 1.5rem;
+  background: #164B60;
+  background-size: 400%;
+  color: #fff;
+  border: none;
+}
+
+.button:hover::before {
+  transform: scaleX(1);
+}
+
+.button-content {
+  position: relative;
+  z-index: 1;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  width: 100%;
+  height: inherit;
+  border-radius: inherit;
+  background: linear-gradient(
+    82.3deg,
+    rgba(150, 93, 233, 1) 10.8%,
+    rgba(99, 88, 238, 1) 94.3%
+  );
+  transition: all 0.475s;
+}
+    </style>
+</head>
+<body>
+    
+    <%- include("./partials/navbar.ejs"); -%>
+    <section class="container">    
+    <% if (locals.id) { %>
+    <p id="shortURL">URL Generated: <span id="link">http://localhost:1337/url/<%= id %></span></p>
+    <button  id="shortLink" class="button" onclick="copyToClipboard()">
+            <span class="button-content">copy </span>
+    </button>
+    <% } %>
+    </section>
+    
+    <%- include("./partials/footer.ejs"); -%>
+
+      <script>
+        const copyToClipboard = () => {
+            const shortURL = document.getElementById("link");
+            const el = document.createElement('textarea');
+            el.value = shortURL.innerText;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            alert("Copied the text: " + shortURL.innerText);
+        }
+      </script>
+</body>
+</html>

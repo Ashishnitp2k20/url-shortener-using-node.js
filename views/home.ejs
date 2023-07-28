@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel=icon href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/svgs/solid/rocket.svg>
+    <title>Home Page | URL shortener</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            height: 100vh;
+            background: linear-gradient(180deg, #1B6B93, #9BDEAC) no-repeat scroll;
+        }
+        .table-div {
+          display: none;
+        }
+        
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      tr:nth-child(odd) {
+        background-color: #111;
+        color: white;
+      }
+      input[type="text"] {
+        width: 50vh;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+      }
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        label {
+            font-size: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #holdForm {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+        #shortLink {
+            width: 50vh;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+        .original-url {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .description {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 80vh;
+          margin-top: 36px;
+        }
+        .image {
+          width: 40%;
+          height: 90%;
+          mix-blend-mode: color-burn;
+          background: none;
+        }
+        .texts {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;          
+          background:  #0B666A ;
+        }
+        .texts h1 {
+          font-size: 20px;
+          color: rgba(0, 0, 0, 0.7);
+          font-style: italic;
+          font-weight: 600;
+        }
+        .texts p{
+          margin: 0 10px;
+          padding: auto;
+          font-size: 16px;
+          color: rgba(0, 0, 0, 0.7);
+          font-style: italic;
+          font-weight: 600;
+        }
+        @media only screen and (max-width: 600px) {
+          .table-div {
+            display:block !important;
+          }
+            #holdForm {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 80vh;
+            }
+            #shortLink {
+                width: 50vh;
+                padding: 12px 20px;
+                margin: 8px 0;
+                box-sizing: border-box;
+            }
+            label {
+                font-size: 20px;
+                position: relative;
+                margin-left: 50px;
+            }
+            input[type="text"] {
+                width: 50vh;
+                padding: 12px 20px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;                                                                                   
+            }
+            .table-div {
+                overflow-x: auto;
+            }
+            .genBtn {
+                display: block;
+                position: absolute;
+                margin-left: 220px;
+            }
+            .description
+            {
+              display: none !important;
+            }
+            
+
+        }
+
+    </style>
+  </head>
+  <body>
+    <%- include("./partials/navbar.ejs"); -%>
+    <h1>URL Shortener</h1>
+    <% if (locals.id) { %>
+      <p id="shortURL">URL Generated: http://localhost:1337/short.ly/<%= id %></p>
+      <button  id="shortLink" onclick="copyToClipboard()">Copy</button>
+      <% } %>
+    <div id="holdForm">
+      <form method="post" action="/url">
+        <label>Enter Your Original URL</label>
+        <input type="text" name="url" required placeholder="https://example.com" />
+        <button class="genBtn" type="submit">Generate</button>
+      </form>
+    </div>
+    <center>
+    <button class="showBtn" onclick="showTable()">Show visitHistory</button>
+    </center>
+    <div class="table-div" >
+        <% if (locals.urls) { %>
+        <table>
+          <thead>
+            <th>S. No</th>
+            <th>ShortID</th>
+            <th>Redirect</th>
+            <th>Clicks</th>
+          </thead>
+          <tbody>
+            <% urls.forEach((url, index) => { %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= url.shortId %></td>
+              <td class="original-url"><%= url.redirectURL %></td>
+              <td><%= url.visitHistory.length %></td>
+              
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <% } %>
+      </div>
+
+      <section class="description">
+        <div class="image">
+          <img src="https://cdn.fandangoseo.com/wp-content/uploads/2021/03/domain.jpg.webp" alt="url-image" class="img">
+        </div>
+        <div class="texts">
+          <h1>What is URL shortener?</h1>
+          <p>URL shortener is a service that takes in a long URL and gives you a short and memorable 
+            URL that you can distribute to anyone you want. A URL shortener works because of a Web 
+            server function called a redirect. The redirect sends anyone who clicks on the short URL 
+            to the long URL. </p>
+
+          <h1>Why use URL shortener?</h1>
+          <p>URL shorteners make sharing long links more manageable. Say you want to provide a link on a 
+            business card, in an advertisement, or in another situation where hyperlinking isn't ideal. 
+            A shortened URL takes up less space, is more memorable and keeps your text tidy. For example, 
+            you can convert this URL: https://example.com/products/?category=men&color=green&discount=1 
+            To this short URL: https://example.com/1a2b3c</p>
+
+          <h1>How to use URL shortener?</h1>
+          <p>Enter the URL that you want to shorten into the input box on the URL shortener website. 
+            Click the "Shorten" button. Copy the shortened URL and paste it into the address field of 
+            your browser. You will be redirected to the original URL.</p>
+
+          <h1>How to create URL shortener?</h1>
+          <p>URL shortener is a service that takes in a long URL and gives you a short and memorable 
+            URL that you can distribute to anyone you want. A URL shortener works because of a Web 
+            server function called a redirect. The redirect sends anyone who clicks on the short URL 
+            to the long URL. </p>
+
+
+
+        </div>
+      </section>
+
+      <%- include("./partials/footer.ejs"); -%>
+
+      
+    
+    <s>
+      <script>
+      function showTable() {
+        var x = document.getElementsByClassName("table-div");
+        if (x[0].style.display === "none") {
+          x[0].style.display = "block";
+        } else {
+          x[0].style.display = "none";
+        }
+      }
+        function copyToClipboard() {
+        var copyText = document.getElementById("shortURL");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        alert("Copied the text: " + copyText.value);
+      }
+
+    </script>
+
+  </body>
+</html>

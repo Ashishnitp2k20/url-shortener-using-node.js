@@ -1,0 +1,251 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js"></script>
+    <script src="https://kit.fontawesome.com/ebbc1aa60f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.alert {
+    position: fixed;
+    top: 5%;
+    right: 2%;
+    color: #fff;
+    font-weight: 800;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    padding: 20px;
+    width: 300px;
+    height: 94vh;
+    background: #111;
+    border-radius: 10px;
+    transform: translateX(150%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.alert .navigation1 {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    text-align: center;
+}
+
+.alert .navigation1 li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.alert .navigation li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.alert p {
+    margin: 30px;
+    letter-spacing: 1px;
+}
+
+.alert i {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 30px;
+    cursor: pointer;
+    color: #fff;
+}
+
+header {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 20px 60px;
+    background: #111;
+    position: fixed;
+    border-bottom: 1px solid #aaa;
+}
+
+header .logo {
+    color: #fff;
+    font-weight: bold;
+    font-size: 2.5em;
+    text-decoration: none;
+}
+
+header ul {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 60px;
+    list-style: none;
+}
+
+header .navigation li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+header .navigation li a:hover {
+    border-bottom: 1px solid #fff;
+}
+
+header .hamburger {
+    display: none;
+    color: #fff;
+    cursor: pointer;
+}
+.logout{
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    background: linear-gradient(to right, #ff105f, #ffad06);
+    opacity: 0.8;
+    border-radius: 30px;
+    transition: all 0.2s ease;
+}
+.logout:hover{
+    background: linear-gradient(to right, #ffad06, #ff105f);
+    font-weight: bold;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+#logoutBtn{
+    text-decoration: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    background: linear-gradient(to right, #ff105f, #ffad06);
+    opacity: 0.8;
+    border-radius: 30px;
+    transition: all 0.2s ease;
+}
+#logoutBtn:hover{
+    background: linear-gradient(to right, #ffad06, #ff105f);
+    border: none;
+}
+
+@media(max-width:991px) {
+    header .navigation {
+        display: none;
+    }
+
+    header .hamburger {
+        display: block;
+    }
+    .fai{
+        display: none;
+    }
+    .logout{
+        background-color: #111;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        background: linear-gradient(to right, #ff105f, #ffad06);
+        border-radius: 30px;
+        transition: all 0.2s ease;
+    }
+    .logout:hover{
+        background: linear-gradient(to right, #ffad06, #ff105f);
+        cursor: pointer;
+    }
+    .fai{
+        display: inline-block;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">SHORT.LY</div>
+        <ul class="navigation">
+            <li><a href="http://localhost:1337/">HOME</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+            <li id="logoutBtn">  
+                <small>Welcome, <%= username %>!</small>
+                    <a id="logoutBtn" href="http://localhost:1337/logout">
+                   <input type="button" value="Logout" class="logout"/>
+                </a>
+            </a></li>
+        </ul>
+        <div class="hamburger">
+            <i class="fa-solid fa-bars on" id="on"></i>
+        </div>
+        <div class="alert">
+            <ul class="navigation1">
+                <i class='bx bxs-x-circle close'></i>
+                <li><a href="http://localhost:1337/" class="out">HOME</a></li>
+                <li><a href="#about" class="out">ABOUT</a></li>
+                <li><a href="#contact" class="out">CONTACT</a></li>
+                <li><a href="http://localhost:1337/logout">  
+                    <small>Welcome, <%= username %>!</small>
+                        <input type="button" value="Logout" class="logout"/>                        
+                </a></li>
+                <li><a href="#">
+                    <br><br>
+                    <small><span> <i class="fa-brands fa-linkedin"></i> <i class="fa-brands fa-square-github"></i></span> </small>
+                </a></li>
+            </ul>
+            </i>
+        </div>
+    </header>
+    <script>
+              $(document).ready(function () {
+            $(".on").click(function () {
+                $('.alert').css({
+                    'transform': 'translateX(0)',
+                });
+            });
+
+            $(".close").click(function () {
+                $('.alert').css({
+                    'transform': 'translateX(150%)',
+                });
+            });
+
+            $(".out").click(function () {
+                $('.alert').css({
+                    'transform': 'translateX(150%)',
+                });
+            })
+        })
+
+        const logoutBtn = document.querySelector(".logout");
+        logoutBtn.addEventListener("click", () => {
+            window.location.href = "http://localhost:1337/logout";
+            alert("You have been logged out!", "success");
+        });
+    </script>
+</body>
+</html>
